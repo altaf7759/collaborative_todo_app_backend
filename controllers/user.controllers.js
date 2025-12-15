@@ -96,14 +96,12 @@ export const loginUser = async (req, res) => {
                   }
             )
 
-           const isProd = process.env.NODE_ENV === "production";
-
-            res.cookie("token", token, {
+           res.cookie("token", token, {
               httpOnly: true,
-              secure: isProd,                 
-              sameSite: isProd ? "none" : "lax",
+              secure: true,       // MUST be true for SameSite=None
+              sameSite: "none",   // allow cross-site
               maxAge: 24 * 60 * 60 * 1000
-            }).status(200).json({
+            });.status(200).json({
                   success: true,
                   message: "Login Successfully",
                   user
