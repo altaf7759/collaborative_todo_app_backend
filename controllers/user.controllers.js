@@ -101,7 +101,7 @@ export const loginUser = async (req, res) => {
               secure: true,       // MUST be true for SameSite=None
               sameSite: "none",   // allow cross-site
               maxAge: 24 * 60 * 60 * 1000
-            });.status(200).json({
+            }).status(200).json({
                   success: true,
                   message: "Login Successfully",
                   user
