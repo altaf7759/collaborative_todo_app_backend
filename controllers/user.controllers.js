@@ -103,7 +103,11 @@ export const loginUser = async (req, res) => {
               secure: isProd,                 
               sameSite: isProd ? "none" : "lax",
               maxAge: 24 * 60 * 60 * 1000
-            });
+            }).status(200).json({
+                  success: true,
+                  message: "Login Successfully",
+                  user
+            })
 
       } catch (error) {
             console.log(error)
