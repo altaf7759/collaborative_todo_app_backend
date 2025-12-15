@@ -19,10 +19,24 @@ connectDB()
 
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors({
-      origin: "https://collaborative-todo-app-l4vy.vercel.app",
-      credentials: true
-}))
+const allowedOrigin = "https://collaborative-todo-app-l4vy.vercel.app";
+
+app.use(
+  cors({
+    origin: allowedOrigin,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+
+// Handle OPTIONS preflight for all routes
+app.options("*", cors({
+  origin: allowedOrigin,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // API Endpoints
 app.use("/api/user", userRouter)
